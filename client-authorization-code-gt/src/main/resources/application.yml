@@ -1,0 +1,12 @@
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8100/oauth/token
+      userAuthorizationUri: http://localhost:8100/oauth/authorize
+      clientId: clientAuthorizationCodeGT
+      #clientSecret: 123456
+      clientSecret: $2a$04$SiCp/ZGQgC.f8dXCntym7uF.1JAHlfuEvd4NSbNDB4r0kvvmN1dVG
+      clientAuthenticationScheme: form
+      grant-type: authorization_code
+      registered-redirect-uri: http://localhost:9001/callback
+

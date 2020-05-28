@@ -1,0 +1,6 @@
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8100/user
+    client:
+      grant-type: authorization_code

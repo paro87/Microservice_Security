@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Authorization Server</title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <style>
+        body {
+            padding-top: 60px;
+        }
+        .navbar-inverse {
+            background-color: #223;
+        }
+    </style>
+</head>
+<body class="py-1 pb-5">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid mx-5">
+        <p class="navbar-brand text-warning mx-5 my-0" >Microservice Security: <span class="badge badge-light">OAuth Authorization Server</span></p>
+    </div>
+
+</nav>
+<div class="container col-md-10 my-5">
+    <p class="text-center text-info font-weight-bold">Registered applications</p>
+
+    <div th:if="${applications != null}">
+        <table class="table">
+            <tr>
+                <td>Application name</td>
+                <td>client type</td>
+                <td>client ID</td>
+                <td>client secret</td>
+                <td>Delete app</td>
+            </tr>
+            <tr th:each="app : ${applications}">
+                <td th:text="${app.additionalInformation['name']}"></td>
+                <td th:text="${app.additionalInformation['client_type']}"></td>
+                <td th:text="${app.clientId}">client_id</td>
+                <td th:text="${app.clientSecret}">client_secret</td>
+                <td><a class="btn btn-danger" href="#" th:href="@{remove(client_id=${app.clientId})}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    <a class="btn btn-primary float-right" href="/client/register">Create a new app</a>
+</div>
+<div class="container">
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+</body>
+</html>
+

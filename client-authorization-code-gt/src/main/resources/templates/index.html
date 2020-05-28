@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Client service for Authorization Code Grant Type</title>
+    <link href="../static/css/bootstrap.css" src="../static/css/bootstrap.css" type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <style>
+        body {
+            padding-top: 60px;
+        }
+        .navbar-inverse {
+            background-color: #223;
+        }
+    </style>
+</head>
+<body class="py-1">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid mx-5">
+        <p class="navbar-brand text-warning mx-5 my-0" >Microservice Security: <span class="badge badge-light">OAuth Client - Authorization Code</span></p>
+    </div>
+
+</nav>
+<div class="container col-sm-6 my-5">
+    <p class="text-center text-info font-weight-bold">Select the App to access</p>
+    <div class="container my-5">
+        <a class="btn btn-outline-success btn-lg" href="/search" role="button">Health App</a>
+    </div>
+
+</div>
+
+<a href="/dashboard">Get clients</a>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
+</body>
+</html>
+

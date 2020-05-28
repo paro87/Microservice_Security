@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head><title>client app</title></head>
+<body>
+<h1>that's your dashboard</h1>
+<p class="text-dark" th:object="${user}" th:text="${user.getAccessToken()}"></p>
+<p class="text-dark" th:object="${user}" th:text="${user.getUsername()}"></p>
+<p class="text-dark" th:object="${user}" th:text="${user.getId()}"></p>
+<table>
+    <tr><td><b>That's your entries</b></td></tr>
+    <tr th:each="patient : ${patients}">
+        <td th:text="${patient}">value</td>
+    </tr>
+
+</body>
+</html>

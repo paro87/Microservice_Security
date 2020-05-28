@@ -1,0 +1,54 @@
+server:
+  port: 8060
+
+
+spring:
+  main:
+    web-application-type: none
+  cloud:
+    gateway:
+      routes:
+        - id: patient-service
+          uri: http://localhost:8092                         #Spring Cloud Netflix Ribbon load-balancing via the lb prefix
+          predicates:
+            - Path=/patient/**
+          filters:
+            - RewritePath=/patient/(?<path>.*), /service/$\{path}  #To use with Swagger
+            - TokenRelay=
+              #- RewritePath=/patient/(?<path>.*), /$\{path}    #To use without Swagger (replaces /patient/foo to /foo (during 8060 -> 8092))
+        - id: department-service
+          uri: http://localhost:8091
+          predicates:
+            - Path=/department/**
+          filters:
+            - RewritePath=/department/(?<path>.*), /service/$\{path}  #To use with Swagger
+            - TokenRelay=
+            #- RewritePath=/department/(?<path>.*), /$\{path}    #To use without Swagger (replaces /patient/foo to /foo (during 8060 -> 8091))
+        - id: hospital-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/hospital/**
+          filters:
+            - RewritePath=/hospital/(?<path>.*), /service/$\{path}  #To use with Swagger
+            - TokenRelay=
+            #- RewritePath=/hospital/(?<path>.*), /$\{path}    #To use without Swagger (replaces /patient/foo to /foo (during 8060 -> 8090))
+  security:
+    oauth2:
+      client:
+        registration:
+          login-client:
+            provider: jwt-authorization-service
+            client-id: clientAuthorizationCodeGT
+            client-secret: 123456
+            authorization-grant-type: authorization_code
+            redirect-uri-template: "http://localhost:9001/callback"
+            scope: read_data
+        provider:
+          uaa:
+            authorization-uri: http://localhost:8100/oauth/authorize
+            token-uri: http://localhost:8100/oauth/token
+            user-info-uri: http://localhost:8100/userinfo
+            user-name-attribute: sub
+            #jwk-set-uri: http://localhost:8090/uaa/token_keys
+  thymeleaf:
+    cache: false
